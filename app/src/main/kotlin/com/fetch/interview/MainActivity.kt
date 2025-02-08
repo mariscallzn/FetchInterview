@@ -1,16 +1,19 @@
 package com.fetch.interview
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import com.fetch.core.uisystem.theme.FetchTheme
+import com.fetch.feature.home.HomeScreen
 
-class MainActivity: ComponentActivity() {
+class MainActivity : ComponentActivity() {
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //TODO: Define uisystem
-        setContentView(TextView(baseContext).apply { text = "Hello, world" })
+        setContent {
+            FetchTheme {
+                HomeScreen()
+            }
+        }
     }
 }

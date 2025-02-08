@@ -21,5 +21,8 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "FetchInterview"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
- 
+include(":core:model")
+include(":core:uisystem")
+include(":feature:home")

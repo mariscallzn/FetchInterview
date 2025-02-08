@@ -26,6 +26,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.uisystem)
+    implementation(projects.feature.home)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)

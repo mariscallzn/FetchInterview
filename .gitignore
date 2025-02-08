@@ -1,6 +1,8 @@
 *.iml
 .gradle
 /local.properties
+
+# IDEA/Android Studio project files
 .idea/*
 /.idea/caches
 /.idea/libraries
@@ -9,8 +11,22 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
+
+# generated files
+bin/
+gen/
+out/
+build/
+generated/
+
+# Android Studio captures folder
 /captures
 .externalNativeBuild
 .cxx
+
+# Local configuration file (sdk path, etc)
 local.properties
+
+# Kotlin
+.kotlin
+
