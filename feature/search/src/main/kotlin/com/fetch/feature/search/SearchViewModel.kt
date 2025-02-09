@@ -2,24 +2,43 @@ package com.fetch.feature.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kesicollection.core.redux.creator.createStore
+import com.kesicollection.core.redux.creator.reducer
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 /**
- * ViewModel that manages UiState and User interactions of [SearchScreen]
+ * Available action to be sent to [SearchViewModel] from [SearchScreen]
+ */
+sealed interface ScreenAction {
+    data object Reset: ScreenAction
+}
+
+/**
+ * ViewModel that manages the [SearchUiState] from the [ScreenAction] of [SearchScreen]
  */
 @HiltViewModel
 class SearchViewModel @Inject constructor() : ViewModel() {
 
-    private val _uiState = MutableStateFlow(initialState)
-    val uiState: StateFlow<SearchUiState>
-        get() = _uiState.stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000),
-            initialValue = initialState
-        )
+    private val store = createStore(
+        coroutineScope = viewModelScope,
+        initialState = initialState,
+        reducer = reducer<SearchUiState, ScreenAction> { state, action ->
+            when (action) {
+                ScreenAction.Reset -> initialState
+            }
+        }
+    )
+
+    val uiState = store.subscribe.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = initialState
+    )
+
+    fun dispatch(action: Any) {
+        store.dispatch(action)
+    }
 }

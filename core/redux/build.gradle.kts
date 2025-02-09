@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-    api(libs.kotlinx.coroutines.andoir)
+    api(libs.kotlinx.coroutines.android)
 }
