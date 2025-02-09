@@ -4,10 +4,5 @@ plugins {
 }
 
 android {
-    namespace = "com.fetch.feature.home"
-}
-
-dependencies {
-    api(projects.feature.search)
-    api(projects.feature.me)
+    namespace = "com.fetch.feature.search"
 }

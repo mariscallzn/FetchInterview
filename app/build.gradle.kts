@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.fetch.android.application)
     alias(libs.plugins.fetch.android.application.compose)
+    alias(libs.plugins.fetch.hilt)
 }
 
 android {
@@ -29,6 +30,7 @@ dependencies {
     implementation(projects.core.uisystem)
     implementation(projects.feature.home)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
 }

@@ -63,5 +63,9 @@ gradlePlugin {
             id = libs.plugins.fetch.android.feature.get().pluginId
             implementationClass = "AndroidFeatureConventionPlugin"
         }
+        register("hilt") {
+            id = libs.plugins.fetch.hilt.get().pluginId
+            implementationClass = "HiltConventionPlugin"
+        }
     }
 }
