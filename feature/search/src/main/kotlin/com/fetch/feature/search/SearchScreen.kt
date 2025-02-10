@@ -1,6 +1,8 @@
 package com.fetch.feature.search
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,6 +47,10 @@ internal fun SearchScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
-        Text(text = uiState.placeholder)
+        LazyColumn {
+            items(uiState.cachedItems) { item ->
+                Text(item.name?:"")
+            }
+        }
     }
 }
