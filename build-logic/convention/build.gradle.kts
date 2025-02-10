@@ -73,5 +73,9 @@ gradlePlugin {
             id = libs.plugins.fetch.android.room.get().pluginId
             implementationClass = "AndroidRoomConventionPlugin"
         }
+        register("androidTest") {
+            id = libs.plugins.fetch.android.test.get().pluginId
+            implementationClass = "AndroidTestConventionPlugin"
+        }
     }
 }
