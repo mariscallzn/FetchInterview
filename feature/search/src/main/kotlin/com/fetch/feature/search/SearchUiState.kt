@@ -1,7 +1,7 @@
 package com.fetch.feature.search
 
-import com.fetch.core.model.HiringItem
 import com.fetch.data.repository.SearchRepository
+import com.fetch.feature.search.uimodel.UiHiringGroup
 
 /**
  * Data class that represents the ui state for [SearchScreen]
@@ -11,7 +11,7 @@ import com.fetch.data.repository.SearchRepository
  * [SearchViewModel] attempt to fetch the data right away in "onStart" flow's call.
  */
 data class SearchUiState(
-    val cachedItems: List<HiringItem> = emptyList(),
+    val cachedItems: List<UiHiringGroup> = emptyList(),
     val isFetchingItems: Boolean = true,
     val error: ErrorState? = null
 )

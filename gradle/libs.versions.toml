@@ -7,6 +7,7 @@ androidxComposeFoundation = "1.8.0-beta01"
 androidxLifecycle = "2.8.7"
 androidxLintGradle = "1.0.0-alpha03"
 androidxNavigation = "2.8.6"
+coil = "2.7.0"
 coreKtx = "1.15.0"
 espressoCore = "3.6.1"
 hilt = "2.54"
@@ -46,6 +47,8 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-junit = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitVersion" }
 androidx-lint-gradle = { group = "androidx.lint", name = "lint-gradle", version.ref = "androidxLintGradle" }
+coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }

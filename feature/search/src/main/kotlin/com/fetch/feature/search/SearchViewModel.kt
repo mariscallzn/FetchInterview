@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fetch.core.model.HiringItem
 import com.fetch.data.repository.SearchRepository
+import com.fetch.feature.search.domain.MapHiringItemsUseCase
+import com.fetch.feature.search.uimodel.UiHiringGroup
 import com.kesicollection.core.redux.creator.createAsyncThunk
 import com.kesicollection.core.redux.creator.createStore
 import com.kesicollection.core.redux.creator.reducer
@@ -26,6 +28,7 @@ sealed interface ScreenAction {
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository,
+    private val mapHiringItemsUseCase: MapHiringItemsUseCase,
 ) : ViewModel() {
 
     private val store = createStore(
@@ -48,8 +51,8 @@ class SearchViewModel @Inject constructor(
         store.dispatch(action)
     }
 
-    val fetchHiringData = createAsyncThunk<List<HiringItem>, Unit>("") { _, _ ->
-        searchRepository.fetch().getOrThrow()
+    val fetchHiringData = createAsyncThunk<List<UiHiringGroup>, Unit>("fetch-hiring-data") { _, _ ->
+        mapHiringItemsUseCase(searchRepository.fetch().getOrThrow())
     }.apply {
         store.builder.addCase(pending) { state, _ ->
             state.copy(

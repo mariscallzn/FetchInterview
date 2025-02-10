@@ -6,3 +6,8 @@ plugins {
 android {
     namespace = "com.fetch.feature.me"
 }
+
+dependencies {
+    implementation(libs.coil.kt)
+    implementation(libs.coil.kt.compose)
+}

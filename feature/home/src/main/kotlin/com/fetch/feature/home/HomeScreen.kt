@@ -3,6 +3,8 @@ package com.fetch.feature.home
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,16 +30,25 @@ fun HomeScreen(
 ) {
     val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
     windowSizeClass.windowWidthSizeClass
-    if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
-        Row(modifier = modifier.fillMaxWidth()) {
-            SearchScreen(modifier = Modifier.weight(1f))
-            MeScreen(modifier = Modifier.weight(1f))
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+    ) { innerPadding ->
+        if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
+            Row(modifier = modifier
+                .fillMaxWidth()
+                .padding(innerPadding)) {
+                SearchScreen(modifier = Modifier.weight(1f))
+                MeScreen(modifier = Modifier.weight(1f))
+            }
+        } else {
+            SearchScreen(
+                onMeClick = onMeClick,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            )
         }
-    } else {
-        SearchScreen(
-            onMeClick = onMeClick,
-            modifier = Modifier.fillMaxSize()
-        )
     }
 }
 
