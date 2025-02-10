@@ -5,7 +5,9 @@ import com.fetch.data.api.HiringApi
 
 class TestHiringApi: HiringApi {
 
-    var result: Result<List<HiringItem>> = Result.success(emptyList())
+    var fetchResult: Result<List<HiringItem>> = Result.success(emptyList())
+    var insertAllResult: Result<Unit> = Result.success(Unit)
 
-    override suspend fun fetch(): Result<List<HiringItem>> = result
+    override suspend fun fetch(): Result<List<HiringItem>> = fetchResult
+    override suspend fun insertAll(items: List<HiringItem>): Result<Unit> = insertAllResult
 }

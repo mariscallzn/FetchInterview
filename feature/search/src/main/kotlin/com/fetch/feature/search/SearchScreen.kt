@@ -60,13 +60,12 @@ internal fun SearchScreen(
     Box(modifier = modifier) {
         Column(modifier = Modifier.fillMaxSize()) {
             if (uiState.isFetchingItems) {
-                Spacer(Modifier.weight(1f))
                 CircularProgressIndicator(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                 )
-                Spacer(Modifier.weight(1f))
-            } else LazyColumn(contentPadding = PaddingValues(bottom = onMeClick?.let { 72.dp }
+            }
+            LazyColumn(contentPadding = PaddingValues(bottom = onMeClick?.let { 72.dp }
                 ?: 0.dp)) {
                 items(uiState.cachedItems) { item ->
                     HiringGroup(item)

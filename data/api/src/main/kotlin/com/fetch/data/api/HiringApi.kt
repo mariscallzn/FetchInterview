@@ -12,4 +12,10 @@ interface HiringApi {
      * @return The list of Hiring items wrapped on a [Result]
      */
     suspend fun fetch(): Result<List<HiringItem>>
+
+    /**
+     * It will insert all items
+     * @return a wrapper [Result] of type unit
+     */
+    suspend fun insertAll(items: List<HiringItem>): Result<Unit>
 }

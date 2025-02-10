@@ -10,4 +10,7 @@ class RetrofitHiringApi @Inject constructor(
     override suspend fun fetch(): Result<List<HiringItem>> = Result.runCatching {
         retrofitFetchNetworkApi.fetchHiringItems()
     }
+
+    override suspend fun insertAll(items: List<HiringItem>): Result<Unit> =
+        Result.failure(Throwable("No end point available"))
 }

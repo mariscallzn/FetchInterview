@@ -2,7 +2,6 @@ package com.fetch.feature.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fetch.core.model.HiringItem
 import com.fetch.data.repository.SearchRepository
 import com.fetch.feature.search.domain.MapHiringItemsUseCase
 import com.fetch.feature.search.uimodel.UiHiringGroup
@@ -41,7 +40,10 @@ class SearchViewModel @Inject constructor(
         }
     )
 
-    val uiState = store.subscribe.onStart { dispatch(fetchHiringData(Unit)) }.stateIn(
+    val uiState = store.subscribe.onStart {
+        dispatch(fetchLocalHiringData(Unit))
+        dispatch(fetchNetworkHiringData(Unit))
+    }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = initialState
@@ -51,8 +53,30 @@ class SearchViewModel @Inject constructor(
         store.dispatch(action)
     }
 
-    val fetchHiringData = createAsyncThunk<List<UiHiringGroup>, Unit>("fetch-hiring-data") { _, _ ->
-        mapHiringItemsUseCase(searchRepository.fetch().getOrThrow())
+    val fetchLocalHiringData = createAsyncThunk<List<UiHiringGroup>, Unit>("fetch-hiring-local-data") { _, _ ->
+        mapHiringItemsUseCase(searchRepository.fetchLocal().getOrThrow())
+    }.apply {
+        store.builder.addCase(pending) { state, _ ->
+            state.copy(
+                error = null
+            )
+        }
+        store.builder.addCase(fulfilled) { state, action ->
+            action.payload.getOrNull()
+                ?.let { state.copy(cachedItems = it) } ?: state
+        }
+        store.builder.addCase(rejected) { state, action ->
+            state.copy(
+                error = ErrorState(
+                    ErrorType.HIRING_FETCH,
+                    action.payload.exceptionOrNull()?.message
+                )
+            )
+        }
+    }
+
+    val fetchNetworkHiringData = createAsyncThunk<List<UiHiringGroup>, Unit>("fetch-hiring-network-data") { _, _ ->
+        mapHiringItemsUseCase(searchRepository.syncItems().getOrThrow())
     }.apply {
         store.builder.addCase(pending) { state, _ ->
             state.copy(

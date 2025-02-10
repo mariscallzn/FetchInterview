@@ -7,12 +7,11 @@ import com.fetch.feature.search.uimodel.UiHiringGroup
  * Data class that represents the ui state for [SearchScreen]
  *
  * @property cachedItems these are cached items coming from the data source. Defaults to **empty**
- * @property isFetchingItems indicator that the data is being fetch. Defaults to **true** because the
- * [SearchViewModel] attempt to fetch the data right away in "onStart" flow's call.
+ * @property isFetchingItems indicator that the data is being fetch.
  */
 data class SearchUiState(
     val cachedItems: List<UiHiringGroup> = emptyList(),
-    val isFetchingItems: Boolean = true,
+    val isFetchingItems: Boolean = false,
     val error: ErrorState? = null
 )
 

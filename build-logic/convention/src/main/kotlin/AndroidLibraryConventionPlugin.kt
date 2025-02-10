@@ -46,6 +46,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             dependencies {
                 implementation(libs.findLibrary("kotlinx.serialization.json").get())
                 testImplementation(libs.findLibrary("kotlin.test").get())
+                testImplementation(libs.findLibrary("kotlinx.coroutines.test").get())
                 androidTestImplementation(libs.findLibrary("kotlin.test").get())
             }
         }

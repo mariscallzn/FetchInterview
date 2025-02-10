@@ -18,21 +18,22 @@ class SearchRepositoryTest {
     fun setup() {
         testHiringApi = TestHiringApi()
         repository = SearchRepositoryImpl(
-            networkHiringApi = testHiringApi
+            networkHiringApi = testHiringApi,
+            localHiringApi = testHiringApi,
         )
     }
 
     @Test
-    fun `fetch return failure result`() = testScope.runTest {
-        testHiringApi.result = Result.failure(Throwable("Error"))
-        val result = repository.fetch()
+    fun fetch_fails() = testScope.runTest {
+        testHiringApi.fetchResult = Result.failure(Throwable("Error"))
+        val result = repository.fetchLocal()
         assert(result.isFailure)
     }
 
     @Test
-    fun `fetch return success result`() = testScope.runTest {
-        testHiringApi.result = Result.success(emptyList())
-        val result = repository.fetch()
+    fun fetch_succeed() = testScope.runTest {
+        testHiringApi.fetchResult = Result.success(emptyList())
+        val result = repository.fetchLocal()
         assert(result.isSuccess)
     }
 }
